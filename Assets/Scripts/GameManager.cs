@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RamailoGames;
 using TMPro;
+using FirstGearGames.SmoothCameraShaker;
 
 public enum ColorType
 {
@@ -19,6 +20,8 @@ public struct ColorWithName
 
 public class GameManager : MonoBehaviour
 {
+    public ShakeData shakeData;
+    public ShakeData touchshakeData;
     #region Tmp Text
 
     public TMP_Text GameOverScoreText;
@@ -32,9 +35,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Transform spawnPos;
     public Transform deletePos;
+    public Transform bgspawnPos;
+    public Transform bgdeletePos;
     public Transform leftbound;
     public Transform rightbound;
     public GameObject colorCirclePrefab;
+    public GameObject bgPrefab;
     public PlatfromController platfromController;
 
     public ColorWithName[] availableColors;
@@ -66,8 +72,11 @@ public class GameManager : MonoBehaviour
         });
         paused = false;
         startTime = Time.time;
-        currentSpeed = 2;
         lastScoreCheckedTime = Time.time;
+        //Instantiate(bgPrefab, new Vector3(0,0,0), Quaternion.identity);
+        //Instantiate(bgPrefab, new Vector3(0,5.14f,0), Quaternion.identity);
+        //Instantiate(bgPrefab, new Vector3(0,5.14f*2,0), Quaternion.identity);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -86,7 +95,18 @@ public class GameManager : MonoBehaviour
     {
         GameObject colorCircle = Instantiate(colorCirclePrefab, spawnPos.position, Quaternion.identity);
     }
-
+    public void GenerateBG()
+    {
+        GameObject colorCircle = Instantiate(bgPrefab, bgspawnPos.position, Quaternion.identity);
+    }
+    public void ShakeCamera()
+    {
+        Camera.main.GetComponent<CameraShaker>().Shake(shakeData);
+    }
+    public void TouchShakeCamera()
+    {
+        Camera.main.GetComponent<CameraShaker>().Shake(touchshakeData);
+    }
     public void GameOver()
     {
         //PauseGame();

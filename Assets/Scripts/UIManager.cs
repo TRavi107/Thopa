@@ -34,8 +34,8 @@ public class UIManager : MonoBehaviour
             EnableDisableMusicBtns(musicBtn, 1f);
         }
 
-        soundManager.instance.PlaySound(SoundType.backgroundSound);
-        
+        //soundManager.instance.PlaySound(SoundType.backgroundSound);
+        GetHighScore();
     }
     void GetHighScore()
     {
@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
         {
             EnableDisableMusicBtns(musicBtn, 1f);
 
-            soundManager.instance.MusicVolumeChanged(1);
+            soundManager.instance.MusicVolumeChanged(soundManager.instance.backGroundAudioVolume);
         }
     }
 

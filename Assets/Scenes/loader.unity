@@ -239,15 +239,21 @@ MonoBehaviour:
   mainMenuSound:
   - {fileID: 8300000, guid: 91237498bfe89ca4f809252f50087f52, type: 3}
   backGroundSound:
-  - {fileID: 8300000, guid: 91237498bfe89ca4f809252f50087f52, type: 3}
+  - {fileID: 8300000, guid: 7c588b0fbb77bdc468258e0158478f97, type: 3}
+  - {fileID: 8300000, guid: 65f1719c999a9544aa595255db3f0ee1, type: 3}
   uiSounds:
   - {fileID: 8300000, guid: 2eec827de3fbbba4180d291f9258473b, type: 3}
-  colorChangeSound: []
-  colorHitSound:
-  - {fileID: 8300000, guid: fca3aee358a25a244934fa573e2d7d4c, type: 3}
-  gameOverSound: []
+  colorChangeSound:
+  - {fileID: 8300000, guid: 6dce4757e27310147a068c0a349f10f2, type: 3}
+  - {fileID: 8300000, guid: 25abe25279d0593499007ec5dd843414, type: 3}
+  circleHitSound:
+  - {fileID: 8300000, guid: 81b243167413f3f4880911a6a98a828c, type: 3}
+  - {fileID: 8300000, guid: d6fef64ce84ff3844a7f975af442ff78, type: 3}
+  gameOverSound:
+  - {fileID: 8300000, guid: 4f9311b2b46575a4b9c43354c788e0ea, type: 3}
+  - {fileID: 8300000, guid: e0bae162aa6d7284c88cb76e05237646, type: 3}
   pauseResumeSound: {fileID: 8300000, guid: 2eec827de3fbbba4180d291f9258473b, type: 3}
-  backGroundAudioVolume: 1
+  backGroundAudioVolume: 0.5
   soundeffectVolume: 1
 --- !u!4 &420433882
 Transform:

@@ -12,7 +12,7 @@ public enum SoundType
     backgroundSound,
     uiSound,
     pauseSound,
-    colorHitsound,
+    circleHitsound,
     colorChangeSound,
     gameOverSound,
 }
@@ -25,7 +25,7 @@ public class soundManager : MonoBehaviour
     public List<AudioClip> backGroundSound;
     public List<AudioClip> uiSounds;
     public List<AudioClip> colorChangeSound;
-    public List<AudioClip> colorHitSound;
+    public List<AudioClip> circleHitSound;
     public List<AudioClip> gameOverSound;
 
     public AudioClip pauseResumeSound;
@@ -35,7 +35,6 @@ public class soundManager : MonoBehaviour
     private AudioSource UISoundSource;
     private AudioSource backGroundAudioSource;
     private AudioSource effectSoundSource;
-    private AudioSource shootSoundSource;
 
     private void Awake()
     {
@@ -93,6 +92,7 @@ public class soundManager : MonoBehaviour
                 backGroundAudioSource.clip = clip;
                 backGroundAudioSource.loop = false;
                 backGroundAudioSource.Play();
+                backGroundAudioSource.volume = backGroundAudioVolume;
                 break;
             case SoundType.backgroundSound:
                 soundIndex = Random.Range(0, backGroundSound.Count);
@@ -103,6 +103,7 @@ public class soundManager : MonoBehaviour
                 }
                 backGroundAudioSource.clip = clip;
                 backGroundAudioSource.loop = false;
+                backGroundAudioSource.volume = backGroundAudioVolume;
                 backGroundAudioSource.Play();
                 break;
 
@@ -116,6 +117,7 @@ public class soundManager : MonoBehaviour
                 UISoundSource.clip = clip;
                 UISoundSource.loop = false;
                 UISoundSource.Play();
+                UISoundSource.volume = soundeffectVolume;
                 break;
             case SoundType.pauseSound:
                 clip = pauseResumeSound;
@@ -125,6 +127,7 @@ public class soundManager : MonoBehaviour
                 }
                 UISoundSource.clip = clip;
                 UISoundSource.loop = false;
+                UISoundSource.volume = soundeffectVolume;
                 UISoundSource.Play();
                 break;
 
@@ -132,18 +135,6 @@ public class soundManager : MonoBehaviour
                 
                 soundIndex = Random.Range(0, colorChangeSound.Count);
                 clip = colorChangeSound[soundIndex];
-                if (shootSoundSource == null)
-                {
-                    shootSoundSource = gameObject.AddComponent<AudioSource>();
-                }
-                shootSoundSource.clip = clip;
-                shootSoundSource.loop = false;
-                shootSoundSource.Play();
-                break;
-            
-            case SoundType.colorHitsound:
-                soundIndex = Random.Range(0, colorHitSound.Count);
-                clip = colorHitSound[soundIndex];
                 if (effectSoundSource == null)
                 {
                     effectSoundSource = gameObject.AddComponent<AudioSource>();
@@ -151,6 +142,22 @@ public class soundManager : MonoBehaviour
                 effectSoundSource.clip = clip;
                 effectSoundSource.loop = false;
                 effectSoundSource.Play();
+                effectSoundSource.volume = soundeffectVolume;
+
+                break;
+            
+            case SoundType.circleHitsound:
+                soundIndex = Random.Range(0, circleHitSound.Count);
+                clip = circleHitSound[soundIndex];
+                if (effectSoundSource == null)
+                {
+                    effectSoundSource = gameObject.AddComponent<AudioSource>();
+                }
+                effectSoundSource.clip = clip;
+                effectSoundSource.loop = false;
+                effectSoundSource.Play();
+                effectSoundSource.volume = soundeffectVolume;
+
                 break;
 
             case SoundType.gameOverSound:
@@ -162,6 +169,7 @@ public class soundManager : MonoBehaviour
                 }
                 effectSoundSource.clip = clip;
                 effectSoundSource.loop = false;
+                effectSoundSource.volume = soundeffectVolume;
                 effectSoundSource.Play();
                 break;
             default:
