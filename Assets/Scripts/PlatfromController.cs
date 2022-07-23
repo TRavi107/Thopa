@@ -48,9 +48,11 @@ public class PlatfromController : MonoBehaviour
                 //prefabs.transform.position = new(prefabs.transform.position.x, prefabs.transform.position.y, 1);
                 //StopCoroutine(nameof(ZoomPlatform));
                 //StartCoroutine(nameof(ZoomPlatform));
-                GameManager.instance.TouchShakeCamera();
+                //GameManager.instance.TouchShakeCamera();
                 prefabs.GetComponentInChildren<ParticleSystem>().startColor = mycolor.color;
                 soundManager.instance.PlaySound(SoundType.circleHitsound);
+                StopCoroutine(nameof(ZoomPlatform));
+                StartCoroutine(nameof(ZoomPlatform));
             }
             else
             {
@@ -78,11 +80,23 @@ public class PlatfromController : MonoBehaviour
 
     IEnumerator ZoomPlatform()
     {
-        transform.localScale = 1.1f*Vector2.one;
-        originalScale = 1.1f;
-        yield return new WaitForSeconds(0.75f);
-        transform.localScale = 1 * Vector2.one;
-        originalScale = 1f;
+        float rate = 1f;
+        while (transform.localScale.x < 1.2f)
+        {
+            transform.localScale = new Vector2(transform.localScale.x + rate * Time.deltaTime, transform.localScale.y + rate * Time.deltaTime);
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.1f);
+        while (transform.localScale.x > 1)
+        {
+            transform.localScale = new Vector2(transform.localScale.x - rate * Time.deltaTime, transform.localScale.y - rate * Time.deltaTime);
+            yield return null;
+        }
+        //transform.localScale = 1.1f*Vector2.one;
+        //originalScale = 1.1f;
+        //yield return new WaitForSeconds(0.75f);
+        //transform.localScale = 1 * Vector2.one;
+        //originalScale = 1f;
     }
 
     [System.Obsolete]
@@ -124,10 +138,11 @@ public class PlatfromController : MonoBehaviour
 
     IEnumerator SwitchColor(ColorWithName colorId)
     {
+        int rate = 15;
         while(transform.localScale.x > 0.01f)
         {
-            transform.localScale = new Vector2(transform.localScale.x - 0.1f, transform.localScale.y - 0.1f);
-            yield return new WaitForSecondsRealtime(0.005f);
+            transform.localScale = new Vector2(transform.localScale.x - rate*Time.deltaTime, transform.localScale.y - rate*Time.deltaTime);
+            yield return null;
         }
         GetComponent<SpriteRenderer>().color = colorId.color;
 
@@ -138,8 +153,8 @@ public class PlatfromController : MonoBehaviour
         };
         while (transform.localScale.x < 1)
         {
-            transform.localScale = new Vector2(transform.localScale.x + 0.1f, transform.localScale.y + 0.1f);
-            yield return new WaitForSecondsRealtime(0.005f);
+            transform.localScale = new Vector2(transform.localScale.x + rate*Time.deltaTime, transform.localScale.y + rate*Time.deltaTime);
+            yield return null;
         }
 
     }

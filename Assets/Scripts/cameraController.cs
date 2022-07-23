@@ -29,7 +29,7 @@ public class cameraController : MonoBehaviour
     private void Update()
     {
         if(GameManager.instance!=null)
-            transform.position = new Vector3(transform.position.x, GameManager.instance.platfromController.transform.position.y+1.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, GameManager.instance.platfromController.transform.position.y+2.5f, transform.position.z);
     }
 
     public bool CheckBound(Vector2 pos)
